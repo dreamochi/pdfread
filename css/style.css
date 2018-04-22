@@ -4,8 +4,7 @@ body {
     margin: 0;
 }
 .container {
-    margin: 96px auto 0;
-    padding: 0 15px;
+    margin: 0 auto
 }
 .controller {
     display: flex;
@@ -19,6 +18,7 @@ body {
     background: #fff;
     left: 0;
     right: 0;
+    max-width: 100%;
 }
 .pagation {
     text-align: center;
@@ -29,24 +29,22 @@ body {
 }
 
 .musicShowModal {
-    overflow: hidden;
-    width: 654px;
+    max-width: 1025px;
+    width: 100%;
     margin: auto;
     position: relative;
-}
-
-.musicShowModal .showpage {
-    position: absolute;
-    top: 50%;
-}
-.musicShowModal .showpage span {
-    display: block;
 }
 .showmusic {
     text-align: center;
     position: relative;
     top: 0;
     margin: auto;
+}
+
+.swiper-container{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 .showmusic.swiper-wrapper {
@@ -71,3 +69,38 @@ body {
 .hide {
     display: none;
 }
+
+.swiper-slide img{
+    width: 100%;
+}
+
+.mob .controller{
+    position: fixed;
+    width: 100%;
+    min-width: 100%;
+    height: 120px;
+    display: block;
+    text-align: center;
+}
+.mob .musicShowModal{
+    width: 100%;
+    height: calc(100vh - 120px);
+    margin-top: 120px;
+}
+/* .mob .musicShowModal .audio{
+    width: 100%;
+    height: 40px;
+}
+.mob .musicShowModal .type{
+    width: 50px;
+}
+.mob .musicShowModal .speed{
+    width: 50%;
+}
+.mob .df{
+    display: flex;
+    height: 40px;
+}
+.mob .df .type{
+    margin: 0 20px;
+} */

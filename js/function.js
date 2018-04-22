@@ -31,10 +31,10 @@ class AduioFun {
         triggerChange(pageNubEle);
 
         var showblock = document.querySelector(".showblock");
-        showblock.style.width = _width;
-        showblock.style.height = _height;
-        showblock.style.left = _left;
-        showblock.style.top = _top;
+        showblock.style.width = _width + "px";
+        showblock.style.height = _height + "px";
+        showblock.style.left = _left + "px";
+        showblock.style.top = _top + "px";
     }
 
     getNotePosition(note) {
@@ -42,7 +42,7 @@ class AduioFun {
         for (const val of this._globalNote) {
             if (val[0][0] === note) {
                 _note = val;
-                return false;
+                break;
             }
         }
         return _note;
