@@ -85,24 +85,19 @@
     }
 
     function hengshuping() {
-        // mySwiper.destroy(true, false)
-
         if (typeof window.orientation === "undefined") {
             document.querySelector(".container").classList.add("mob");
             renderPdfSig();
         }
-
-        setTimeout(function() {
-            if (window.orientation === 180 || window.orientation === 0) {
-                document.querySelector(".container").classList.add("mob");
-                renderPdfSig();
-            }
-            if (window.orientation === 90 || window.orientation === -90) {
-                document.querySelector(".container").classList.remove("mob");
-                alert("heng");
-                renderPdfDub();
-            }
-        }, 10);
+        if (window.orientation === 180 || window.orientation === 0) {
+            document.querySelector(".container").classList.add("mob");
+            renderPdfSig();
+        }
+        if (window.orientation === 90 || window.orientation === -90) {
+            document.querySelector(".container").classList.remove("mob");
+            alert("heng");
+            renderPdfDub();
+        }
     }
 
     function renderPdfDub() {
