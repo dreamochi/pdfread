@@ -1,35 +1,15 @@
 (function() {
-    var browser = {
-        versions: (function() {
-            var u = navigator.userAgent,
-                app = navigator.appVersion;
-            return {
-                //移动终端浏览器版本信息
-                trident: u.indexOf("Trident") > -1, //IE内核
-                presto: u.indexOf("Presto") > -1, //opera内核
-                webKit: u.indexOf("AppleWebKit") > -1, //苹果、谷歌内核
-                gecko: u.indexOf("Gecko") > -1 && u.indexOf("KHTML") == -1, //火狐内核
-                mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
-                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-                android: u.indexOf("Android") > -1 || u.indexOf("Linux") > -1, //android终端或者uc浏览器
-                iPhone: u.indexOf("iPhone") > -1 || u.indexOf("Mac") > -1, //是否为iPhone或者QQHD浏览器
-                iPad: u.indexOf("iPad") > -1, //是否iPad
-                webApp: u.indexOf("Safari") == -1 //是否web应该程序，没有头部与底部
-            };
-        })(),
-        language: (navigator.browserLanguage || navigator.language).toLowerCase()
-    };
+    function isMob(){
+        var u = navigator.userAgent
+        return !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)||u.indexOf("Android") > -1 || u.indexOf("Linux") > -1||u.indexOf("iPad") > -1
+    }
     var mySwiper = null;
-
     var url = dataSrc + pdfSrc;
-
     PDFJS.workerSrc = "js/pdfjs/pdf.worker.js";
     var windowWidth = document.querySelector(".musicShowModal").offsetWidth;
     var windowHeight = window.innerHeight;
     var scalePrimary = windowWidth / MusicData.pdfSize().width;
-
     var _pdf = null;
-
     PDFJS.getDocument(url)
         .then(function(pdf) {
             _pdf = pdf;
@@ -66,12 +46,13 @@
             //     });
             // }
 
-            if (browser.versions.mobile) {
+            if (isMob()) {
                 window.addEventListener(
                     "onorientationchange" in window ? "orientationchange" : "resize",
                     hengshupingevent,
                     false
                 );
+                document.querySelector(".container").classList.add("mob");
                 hengshuping();
             } else {
                 renderPdfDub();
@@ -85,17 +66,17 @@
     }
 
     function hengshuping() {
-        if (typeof window.orientation === "undefined") {
-            document.querySelector(".container").classList.add("mob");
+        //test
+        var ss=true
+        alert(window.orientation)
+        if (window.orientation === 180 || window.orientation === 0||ss) {
+            document.querySelector(".container").classList.remove("heng");
+            document.querySelector(".container").classList.add("shu");
             renderPdfSig();
         }
-        if (window.orientation === 180 || window.orientation === 0) {
-            document.querySelector(".container").classList.add("mob");
-            renderPdfSig();
-        }
-        if (window.orientation === 90 || window.orientation === -90) {
-            document.querySelector(".container").classList.remove("mob");
-            alert("heng");
+        if (window.orientation === 90 || window.orientation === -90||!ss) {
+            document.querySelector(".container").classList.remove("shu");
+            document.querySelector(".container").classList.add("heng");
             renderPdfDub();
         }
     }
@@ -123,7 +104,7 @@
             "http://pic.qiantucdn.com/58pic/28/49/22/19z58PICxPehs4eK9922d_PIC2018.jpg!/fw/780/watermark/url/L3dhdGVybWFyay12MS4zLnBuZw==/align/center/crop/0x1009a0a0";
         var htmlStr = "";
         for (var i = 0; i < 3; i++) {
-            htmlStr += '<div class="swiper-slide"><img src="' + imgSrc + '"></div>';
+            htmlStr += '<div class="swiper-slide" style="background-image:url('+imgSrc+')"></div>';
         }
         return htmlStr;
     }
