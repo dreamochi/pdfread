@@ -8,29 +8,11 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="js/swiper/css/swiper.min.css">
     <script src="base/data.js"></script>
-    <!-- <script src="base/IMSLP34851_Tchaikovsky_Piano_Concerto_1_Op_23_mov2_Martha_Argerich.js"></script> -->
-    <script>
-        var _globalScaleW, _globalScaleH;
-        var dataSrc = 'base/'
-        var mp3Src = 'tureck.mp3'
-        var mp4Src = 'tureck.mp4'
-        var pdfSrc = 'aria.pdf'
-        // var mp3Src = 'Tchaikovsky_Piano_Concerto_1_Op_23_mov2_Martha_Argerich.mp3'
-        // var mp4Src = 'Tchaikovsky_Piano_Concerto_1_Op_23_mov2_Martha_Argerich.mp4'
-        // var pdfSrc = 'IMSLP00699-Tchaikovsky_Piano_Concerto_1_Op_23_mov2.pdf'
-
-        function triggerChange(ele) {
-            var ev = new Event('change', { bubbles: true });
-            ev.simulated = true;
-            ele.dispatchEvent(ev)
-        }
-    </script>
     <title>Document</title>
 </head>
 
 <body>
     <div class="container">
-        <!-- <div class="controller" style="display: none;"> -->
         <div class="controller">
             <div class="audio">
                 <audio id="audioplay" width="100%" controls>
@@ -42,7 +24,7 @@
                     <label for="typeBlock">
                         <input type="radio" name="source" id="sourceBlock" class="toggleSource" value="1" checked>mp3
                     </label>
-                    <label for="typeNote">
+                    <label for="sourceNote">
                         <input type="radio" name="source" id="sourceNote" class="toggleSource" value="0">mp34
                     </label>
                 </div>
@@ -66,7 +48,7 @@
         <div class="musicShowModal">
             <div class="showmusic" id="muscic-pdf">
                 <div class="showblock"></div>
-                <div class="showline"></div>
+                <div class="showline hide"></div>
             </div>
             <div class="swiper-container">
                 <div class="swiper-pagination"></div>
@@ -80,18 +62,63 @@
             </div> -->
         </div>
     </div>
-    <input type="hidden" value="1" id="Speed" />
+    <!-- <input type="hidden" value="1" id="Speed" />
     <input type="hidden" value="1" id="pageNub" />
     <input type="hidden" value=1 id="playType" />
     <input type="hidden" value="00:00" id="preTime">
+    
+    <input type="hidden" value="" id="globalScale"> -->
     <input type="hidden" value="0" id="cureentNote">
-    <input type="hidden" value="" id="globalScale">
 
-    <script src="js/pdfjs/pdf.js"></script>
+
+
+    <script>
+        var _globalScaleW, _globalScaleH;
+        var dataSrc = 'base/'
+        var mp3Src = 'Tchaikovsky_Violin_Concerto_Op_35_Oistrakh_1968_mov3.mp3'
+        var mp4Src = 'tureck.mp4'
+        var imgCount = 37
+        var globalPageNub = 1;
+        var mySwiper = null
+        var currentPage = 0
+        var showblockEle = document.querySelector(".showblock");
+        var showlineEle = document.querySelector(".showline");
+        var pagePattern = 'v' //v竖 h横
+        var cureentNoteEle = document.getElementById("cureentNote");
+        // var mp3Src = 'Tchaikovsky_Piano_Concerto_1_Op_23_mov2_Martha_Argerich.mp3'
+        // var mp4Src = 'Tchaikovsky_Piano_Concerto_1_Op_23_mov2_Martha_Argerich.mp4'
+
+        //  // PAGE CHANGE
+        function changePageNub(num) {
+            if (currentPage !== num) {
+                currentPage = num
+                if (--num !== mySwiper.activeIndex) {
+                    mySwiper.slideTo(num, 100, false)
+                    cureentNoteEle.value = 1;
+                    triggerChange(cureentNoteEle);
+                }
+            }
+
+            //页面切换事件后期采用swiper
+            // globalPageNub = num;
+            // let _pageHeight = document.querySelector(".showmusic .canvas").offsetHeight;
+            // document.getElementById("muscic-pdf").style.top = -_pageHeight * globalPageNub + "px";
+        }
+
+        function triggerChange(ele) {
+            var ev = new Event('change', {
+                bubbles: true
+            });
+            ev.simulated = true;
+            ele.dispatchEvent(ev)
+        }
+    </script>
+    </script>
+    <script src="js/fastclick.js"></script>
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/swiper/js/swiper.min.js"></script>
     <script src="js/function.js"></script>
-    <script src="js/pdfload.js"></script>
+    <!-- <script src="js/pdfload.js"></script> -->
     <script src="js/index.js"></script>
 </body>
 

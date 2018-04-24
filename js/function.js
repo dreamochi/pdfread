@@ -5,7 +5,7 @@ class AduioFun {
         this._globalSection = MusicData.measureItems();
         this._globalNote = MusicData.noteItems();
         this._globalTime = MusicData.noteTime();
-        this._globalSpeed = document.getElementById("Speed").value;
+        this._globalSpeed = document.getElementById("swicthSpeed").value;
         this.audioplay = document.getElementById("audioplay");
     }
 
@@ -20,21 +20,19 @@ class AduioFun {
         let _tempNote = this._globalSection[note][1];
         let _pageNub = this._globalSection[note][0][1];
         let _left, _top, _height, _width;
-        let _canvasHeight = document.querySelector(".showmusic canvas").offsetHeight;
+        // let _canvasHeight = document.querySelector(".musicShowModal").offsetHeight;
         _left = _tempNote.x / _globalScaleW;
-        _top = _tempNote.y / _globalScaleH + _canvasHeight * (_pageNub - 1);
+        _top = _tempNote.y / _globalScaleH
+        // _top = _tempNote.y / _globalScaleH + _canvasHeight * (_pageNub - 1);
         _width = (_tempNote.eX - _tempNote.x) / _globalScaleW;
         _height = (_tempNote.eY - _tempNote.y) / _globalScaleH;
 
-        var pageNubEle = document.getElementById("pageNub");
-        pageNubEle.value = _pageNub;
-        triggerChange(pageNubEle);
+        changePageNub(_pageNub)
 
-        var showblock = document.querySelector(".showblock");
-        showblock.style.width = _width + "px";
-        showblock.style.height = _height + "px";
-        showblock.style.left = _left + "px";
-        showblock.style.top = _top + "px";
+        showblockEle.style.width = _width + "px";
+        showblockEle.style.height = _height + "px";
+        showblockEle.style.left = _left + "px";
+        showblockEle.style.top = _top + "px";
     }
 
     getNotePosition(note) {
